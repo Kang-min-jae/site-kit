@@ -11,7 +11,7 @@
 
    > SITE_REQUEST.md대로 사이트를 만들어줘. ★ 칸 중 빈 것만 먼저 물어보고, 끝나면 design-review로 점검해줘.
 
-4. 첫 결과 맨 위의 "결정" 줄(preset·mode·강조색·패턴)을 보고 고칠 것을 말한다
+4. 첫 결과 맨 위의 "결정" 줄(preset·direction·mode·강조색·시그니처·패턴)과 375·1440 캡처를 보고 고칠 것을 말한다
 5. 이 README는 새 저장소에서 그 사이트의 README로 바꿔 쓴다
 
 Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skills/`의 스킬도 자동으로 쓴다. 따로 "플레이북 읽어"라고 하지 않아도 된다.
@@ -20,22 +20,29 @@ Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skil
 
 | 파일 | 역할 |
 |---|---|
-| `AGENTS.md` | **풀스택 규칙 원본** — 19분야 + "왜". 0장은 새 사이트에서 채운다 |
+| `AGENTS.md` | **풀스택 규칙 원본** — 21분야 + "왜". 0장은 새 사이트에서 채운다. 20장 작은 사이트(로그인·DB 없음), 21장 외주와 인계 |
 | `CLAUDE.md` | `@AGENTS.md` 한 줄 — Claude Code가 AGENTS.md를 읽게 한다 |
-| `SITE_REQUEST.md` | 사이트 요청서 빈 양식 (디자인 칸 + 기능·운영 칸) |
-| `CHECKLIST.md` | 단계별 체크리스트 |
+| `SITE_REQUEST.md` | 사이트 요청서 빈 양식 (디자인 칸 = `design/brief.md`와 같은 번호, 기능·운영 칸 F1~F14) |
+| `CHECKLIST.md` | 단계별 체크리스트 (0, A~N — L 작은 사이트 · M 외주 · N AI 기능) |
 | `STACK_MAPPING.md` | 원칙 → 스택별 도구 (Next.js·FastAPI·Node·Django·Rails·Spring) |
 | `PROMPTS.md` · `PROMPT_SHORT.md` | 상황별 요청문, 1쪽 요약 (다른 AI 도구·채팅용) |
 | `adapters/` | Cursor·Copilot·Claude 전역용 파일 — `node scripts/sync-adapters.mjs`로 만든다, 직접 고치지 않는다 |
-| `design/DESIGN.md` | **디자인 규칙 원본** — 원칙, 부품 표, 하지 않을 것, 저작권, 점검표 C1~C20 |
-| `design/tokens.css` | 디자인 값 (Tailwind 4 `@theme`, 역할 이름만) — calm·friendly 프리셋, light·dark |
+| `design/DESIGN.md` | **디자인 규칙 원본** — 바닥(F)·취향(T) 두 층, 원칙, 부품 표, 하지 않을 것, 저작권, 점검표 C1~C24, 품질 기준표 Q1~Q5 |
+| `design/tokens.css` | 디자인 값 (Tailwind 4 `@theme`, 역할 이름만) — calm·friendly 프리셋, light·dark, 아트 디렉션 house·editorial·object |
+| `design/directions.md` · `typography.md` | 아트 디렉션 3종(쓰는 곳·값·배치 문법·시그니처 자리), 글꼴 짝·영문 라벨 규칙·세부 값 |
 | `design/moods.md` · `patterns.md` | 느낌 단어 → 프리셋 고르기, 페이지 패턴 |
-| `design/components/` | React 부품 21종 (Button, TextField, Dialog, Dropzone, SpecList …) |
+| `design/components/` | React 부품 29종 (Button, TextField, Dialog, Dropzone, SpecList … + 쇼케이스 FullBleedMedia·EditorialSplit·MenuList·DragGallery·IndexList·PressQuote·ObjectStage·Reveal) |
 | `design/LOG.md` | 디자인 평가·사이트별 고친 기록 — 취향이 쌓이는 곳 |
 | `design/CREDITS.md` | 글꼴·라이브러리 라이선스 |
-| `.claude/skills/` | `design-site` `design-review` `predeploy-check` `external-api` `usage-alert` `copy-audit` |
-| `scripts/check-contrast.mjs` | 글자·배경 대비(WCAG) 검사 |
+| `.claude/skills/` | `design-site` `design-review` `predeploy-check` `external-api` `usage-alert` `copy-audit` `handover` |
+| `examples/house-restaurant/` | house 디렉션 완성본 예시(가상 음식점) — AI가 같은 디렉션 사이트를 만들기 전에 먼저 본다 |
+| `scripts/check-contrast.mjs` | 글자·배경 대비(WCAG) 검사 — 프리셋·디렉션·밝은 페이지 안 어두운 섹션까지 |
+| `scripts/design-lint.mjs` | 날것의 값·12px 미만·말투·외부 소재·한글 micro 라벨·시안 소재 남음(`--release`)·글꼴 라이선스(`--dist`) 자동 검사 |
+| `scripts/shoot.mjs` | 375·1440 캡처 + 접근성 자동 검사(axe) — 화면 점검 필수 단계 |
+| `scripts/render-stills/` · `build-example.mjs` | 시안 소재 렌더(three.js 정물 + 색감 보정), 완성본 예시 정적 빌드 |
 | `docs/SITE_REQUEST_예시.md` | 요청서 작성 예시 |
+
+도구 스크립트에 필요한 개발 패키지(사이트 저장소에서 한 번): `npm i -D playwright axe-core` (캡처·접근성), 시안 소재 렌더까지 쓰면 `three esbuild`. `design-lint`·`check-contrast`는 추가 패키지가 필요 없다.
 
 부품은 React + Tailwind 4 기준이다. 다른 프레임워크면 `tokens.css`와 `DESIGN.md` 규칙은 그대로 쓰고 부품만 옮겨 만든다.
 
@@ -50,6 +57,11 @@ Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skil
 - 디자인 평가·고친 이유 → `design/LOG.md`
 - 새 스택에서 쓴 도구 → `STACK_MAPPING.md`
 - `PROMPT_SHORT.md`를 고쳤으면 `node scripts/sync-adapters.mjs`
+
+## 버전
+
+- 풀스택 규칙 **v3** (2026-10-30): 20 작은 사이트 · 21 외주와 인계 · 18 AI 보강 · 9 소재 라이선스 · `handover` 스킬
+- 디자인 플레이북 **v0.2.1** (2026-10-30): 바닥/취향 두 층 · 아트 디렉션 · 타이포 · 쇼케이스 부품 · 시안 소재 · 움직임 2단계 · 캡처 필수 + 품질 기준표 · `design-lint` · 접근성 자동 검사. v0.2의 CreditList는 SpecList로, `layout="center"`는 SiteHeader `brandAlign="center"`로 합쳤다
 
 ## 꼭 지킬 것
 

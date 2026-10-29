@@ -257,6 +257,44 @@
 - **Spring Boot**: CI 경로 필터
 - **스택 무관 (CDN · DB · 인프라)**: 미리보기 배포는 끄거나 별도 DB
 
+## 작은 사이트 · 소재 (v3 — 모두 미검증, 공식 문서로 확인)
+
+### 27. 전부 정적으로 만들기
+
+- **Next.js · Vercel**: 정적 렌더링되는 라우트만 두기(빌드 결과의 라우트 표시로 확인), 완전 정적이면 `next.config`의 `output: 'export'`
+- **Node (Express · NestJS)**: 정적 사이트 생성기(Astro·Eleventy 등)로 따로 만들거나 빌드 때 HTML 저장
+- **Django**: 빌드 때 HTML로 내보내는 도구, 또는 정적 사이트 생성기 분리
+- **Rails**: 정적 사이트 생성기 분리
+- **Spring Boot**: 정적 사이트 생성기 분리
+- **스택 무관 (CDN · DB · 인프라)**: CDN 정적 호스팅, 캐시 수명 길게 + 파일 이름에 해시
+
+### 28. 이미지를 빌드 때 미리 만들기 (종량제 변환 끄기)
+
+- **Next.js · Vercel**: `next/image`는 기본적으로 이미지 최적화를 쓴다(Vercel에서는 종량제 이미지 변환으로 센다) → 작은 사이트는 `images.unoptimized` + 빌드 스크립트(sharp 등)로 크기별 파일 생성. 정적 내보내기(`output: 'export'`)에서는 기본 변환을 쓸 수 없다
+- **Node (Express · NestJS)**: sharp로 빌드 때 생성
+- **Django**: 빌드 스크립트(Pillow) 또는 정적 사이트 생성기의 이미지 기능
+- **Rails**: 빌드 스크립트(image_processing / libvips)
+- **Spring Boot**: 빌드 스크립트
+- **스택 무관 (CDN · DB · 인프라)**: `<img srcset sizes>` + `width`·`height`(레이아웃 흔들림 방지), WebP·AVIF
+
+### 29. 가게 정보 구조화 데이터
+
+- **Next.js · Vercel**: 페이지에 `<script type="application/ld+json">`(내용은 `content/`에서 만든다)
+- **Node (Express · NestJS)**: 템플릿 `<head>`에 JSON-LD
+- **Django**: 템플릿 블록에 JSON-LD
+- **Rails**: 레이아웃 `content_for :head`에 JSON-LD
+- **Spring Boot**: Thymeleaf `<head>`에 JSON-LD
+- **스택 무관 (CDN · DB · 인프라)**: schema.org `Restaurant`·`LocalBusiness`(`address`·`telephone`·`openingHoursSpecification`), 검색 엔진의 구조화 데이터 검사 도구로 확인
+
+### 30. 글꼴 불러오기와 라이선스
+
+- **Next.js · Vercel**: `next/font`(빌드 때 내려받아 자체 호스팅, 부분 집합 지정) — 라이선스 확인은 따로 한다
+- **Node (Express · NestJS)**: `@fontsource/*` 패키지(라이선스가 package.json에 적혀 있다) + `font-display: swap`
+- **Django**: 정적 파일로 woff2 + 라이선스 파일 함께
+- **Rails**: 자산 파이프라인으로 woff2 + 라이선스 파일 함께
+- **Spring Boot**: 정적 자원으로 woff2 + 라이선스 파일 함께
+- **스택 무관 (CDN · DB · 인프라)**: SIL OFL 1.1 글꼴은 파일을 배포할 때 라이선스 전문을 함께 둔다. 한글 글꼴은 부분 집합·동적 분할 파일로
+
 ---
 
 ## FastAPI 메모 (도면3D에서 쓴 것 — 표에 열로 올리기 전 단계)

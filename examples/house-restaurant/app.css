@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "../../design/tokens.css";
+@source "../../design";
+@source "./";
+
+/* 미리보기 전용 글꼴 연결. Next.js에서는 next/font로 불러온다 (typography.md 1장) */
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
