@@ -59,7 +59,7 @@ export function HouseRestaurantPage() {
               </h1>
             </Reveal>
             <div className="mt-8 flex flex-col gap-5 md:flex-row md:items-center md:gap-8">
-              <Button href={site.reserveUrl} size="lg" icon={<IconArrowRight size={18} />}>
+              <Button href={site.reserveUrl} icon={<IconArrowRight size={18} />}>
                 자리 예약하기
               </Button>
               <p className="numerals text-body-sm text-ink-2">서촌 골목 2층 · 화–토 18:00–23:00</p>

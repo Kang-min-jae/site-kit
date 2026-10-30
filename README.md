@@ -31,7 +31,7 @@ Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skil
 | `design/tokens.css` | 디자인 값 (Tailwind 4 `@theme`, 역할 이름만) — calm·friendly 프리셋, light·dark, 아트 디렉션 house·editorial·object |
 | `design/directions.md` · `typography.md` | 아트 디렉션 3종(쓰는 곳·값·배치 문법·시그니처 자리), 글꼴 짝·영문 라벨 규칙·세부 값 |
 | `design/moods.md` · `patterns.md` | 느낌 단어 → 프리셋 고르기, 페이지 패턴 |
-| `design/components/` | React 부품 29종 (Button, TextField, Dialog, Dropzone, SpecList … + 쇼케이스 FullBleedMedia·EditorialSplit·MenuList·DragGallery·IndexList·PressQuote·ObjectStage·Reveal) |
+| `design/components/` | React 부품 32종 (Button, TextField, Dialog, Dropzone, SpecList … + 쇼케이스 FullBleedMedia·EditorialSplit·MenuList·DragGallery·IndexList·PressQuote·ObjectStage·Reveal + 도구 화면 Segmented·StageBar·PanelSection) |
 | `design/LOG.md` | 디자인 평가·사이트별 고친 기록 — 취향이 쌓이는 곳 |
 | `design/CREDITS.md` | 글꼴·라이브러리 라이선스 |
 | `.claude/skills/` | `design-site` `design-review` `predeploy-check` `external-api` `usage-alert` `copy-audit` `handover` |
@@ -39,6 +39,7 @@ Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skil
 | `scripts/check-contrast.mjs` | 글자·배경 대비(WCAG) 검사 — 프리셋·디렉션·밝은 페이지 안 어두운 섹션까지 |
 | `scripts/design-lint.mjs` | 날것의 값·12px 미만·말투·외부 소재·한글 micro 라벨·시안 소재 남음(`--release`)·글꼴 라이선스(`--dist`) 자동 검사 |
 | `scripts/shoot.mjs` | 375·1440 캡처 + 접근성 자동 검사(axe) — 화면 점검 필수 단계 |
+| `scripts/licenses.mjs` | 함께 배포되는 글꼴(OFL)·라이브러리(MIT 등) 라이선스 전문을 빌드 때 모아 `public/licenses/`로 — 빌드 명령 앞에 붙인다(풀스택 9장) |
 | `scripts/render-stills/` · `build-example.mjs` | 시안 소재 렌더(three.js 정물 + 색감 보정), 완성본 예시 정적 빌드 |
 | `docs/SITE_REQUEST_예시.md` | 요청서 작성 예시 |
 
@@ -62,6 +63,7 @@ Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skil
 
 - 풀스택 규칙 **v3** (2026-10-30): 20 작은 사이트 · 21 외주와 인계 · 18 AI 보강 · 9 소재 라이선스 · `handover` 스킬
 - 디자인 플레이북 **v0.2.1** (2026-10-30): 바닥/취향 두 층 · 아트 디렉션 · 타이포 · 쇼케이스 부품 · 시안 소재 · 움직임 2단계 · 캡처 필수 + 품질 기준표 · `design-lint` · 접근성 자동 검사. v0.2의 CreditList는 SpecList로, `layout="center"`는 SiteHeader `brandAlign="center"`로 합쳤다
+  - 같은 날 Auto-BIM을 이 판으로 다시 만들며 추가: 도구 화면 부품(`Segmented`·`StageBar`·`PanelSection`, `SpecList layout="row"`, `Checkbox size="sm"`, `Dialog size="xl"`), patterns C형 "무대 + 패널", 부품 평가 2차 반영(첫 화면 주 버튼 md, PressQuote 순서), `scripts/licenses.mjs`
 
 ## 꼭 지킬 것
 
@@ -73,4 +75,4 @@ Claude Code는 `CLAUDE.md` → `AGENTS.md`를 자동으로 읽고, `.claude/skil
 | 사이트 | 시작 | 키트에 남긴 것 |
 |---|---|---|
 | (영화 리뷰 사이트) | — | 풀스택 규칙의 "왜:" 대부분 |
-| 도면3D (졸업작품) | 2026-10 | 부품 Dropzone·SpecList·ProgressBar, 6장 "오래 걸리는 작업은 대기열" (예), STACK_MAPPING FastAPI 메모 |
+| 도면3D → Auto-BIM (캡스톤, 프론트) | 2026-10 | 부품 Dropzone·SpecList·ProgressBar, 6장 "오래 걸리는 작업은 대기열" (예), STACK_MAPPING FastAPI 메모, patterns C형 무대형 · 2026-10-30 v0.2.1로 다시 만들며: 도구 화면 부품 6종, C형 "무대 + 패널", 9장 "라이선스 모아 배포" + `licenses.mjs`, design-site "다시 만들 땐 행동 목록 대조" |

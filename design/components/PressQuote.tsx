@@ -1,5 +1,6 @@
 /**
- * PressQuote — 평가·인용 한 개 (v0.2). 별점(선택) → 매체·사람 이름(라벨) → 인용(세리프).
+ * PressQuote — 평가·인용 한 개 (v0.2). 매체·사람 이름(라벨) → 인용(세리프) → 별점(선택).
+ *   2차 부품 평가(2026-10-30): "별점이 인용 아래로" — 인용이 1등, 별점은 뒷받침
  *
  * 규칙
  * - **실제로 있는 평가만, 출처와 함께.** 지어낸 리뷰·후기·별점을 넣지 않는다 (시안에서도 "예시"라고 보이게 표시).
@@ -32,13 +33,6 @@ export function PressQuote({
   const Source = href ? "a" : "span";
   return (
     <figure className={cx("flex flex-col items-center gap-2 text-center", className)}>
-      {stars ? (
-        <div role="img" aria-label={`5점 만점에 ${rating}점`} className="flex gap-0.5 text-ink">
-          {stars.map((f, i) => (
-            <IconStar key={i} amount={f} />
-          ))}
-        </div>
-      ) : null}
       <figcaption className="micro-label text-ink-2">
         <Source {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})} className={href ? "underline-offset-4 hover:underline" : undefined}>
           {source}
@@ -46,6 +40,13 @@ export function PressQuote({
         {sample ? <span className="ml-2 text-ink-3">· 예시</span> : null}
       </figcaption>
       <blockquote className="max-w-[22ch] font-display text-title leading-tight tracking-title text-ink">“{quote}”</blockquote>
+      {stars ? (
+        <div role="img" aria-label={`5점 만점에 ${rating}점`} className="mt-1 flex gap-0.5 text-ink">
+          {stars.map((f, i) => (
+            <IconStar key={i} amount={f} />
+          ))}
+        </div>
+      ) : null}
     </figure>
   );
 }

@@ -20,6 +20,9 @@ export { ResultBar } from "./ResultBar";
 export { Dropzone } from "./Dropzone";
 export { SpecList, type Spec } from "./SpecList"; // v0.2: CreditList를 합침 (align·labelStyle)
 export { ProgressBar } from "./ProgressBar";
+export { Segmented, type SegmentOption } from "./Segmented";
+export { PanelSection } from "./PanelSection";
+export { StageBar } from "./StageBar";
 
 // v0.2 쇼케이스 부품 (directions.md)
 export { PressQuote } from "./PressQuote";
